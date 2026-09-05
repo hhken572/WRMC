@@ -1,0 +1,29 @@
+[
+    {
+        "date": "2026-08-22",
+        "recipe": "1",
+        "start_time": "11:16",
+        "end_time": "14:17:00",
+        "total_count": 2,
+        "ok_count": 1,
+        "ng_count": 1
+    },
+    {
+        "date": "2026-08-22",
+        "recipe": "2",
+        "start_time": "11:16",
+        "end_time": "14:17:00",
+        "total_count": 1,
+        "ok_count": 1,
+        "ng_count": 0
+    },
+    {
+        "date": "2026-08-24",
+        "recipe": "1",
+        "start_time": "19:22:37",
+        "end_time": "19:27:15",
+        "total_count": 10,
+        "ok_count": 6,
+        "ng_count": 4
+    }
+]
