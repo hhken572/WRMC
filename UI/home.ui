@@ -286,7 +286,7 @@
             </font>
            </property>
            <property name="title">
-            <string>CAMERA 1 - L1</string>
+            <string>CAMERA 1 - KIỂM TRA LỖI LOGO</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -328,7 +328,7 @@
             </font>
            </property>
            <property name="title">
-            <string>CAMERA 2</string>
+            <string>CAMERA 2 - KIỂM TRA LỖI LOGO</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -370,7 +370,7 @@
             </font>
            </property>
            <property name="title">
-            <string>CAMERA 1 - L2 - GỐC</string>
+            <string>CHƯA CẬP NHẬT</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -417,7 +417,7 @@
             </font>
            </property>
            <property name="title">
-            <string>CAMERA 1 - L2 - NHỊ PHÂN</string>
+            <string>CAMERA 1 - KIỂM TRA LỆCH LOGO</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignCenter</set>

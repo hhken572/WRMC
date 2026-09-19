@@ -25,5 +25,14 @@
         "total_count": 10,
         "ok_count": 6,
         "ng_count": 4
+    },
+    {
+        "date": "2026-09-05",
+        "recipe": "1",
+        "start_time": "10:24:14",
+        "end_time": "19:58:23",
+        "total_count": 189,
+        "ok_count": 38,
+        "ng_count": 151
     }
 ]

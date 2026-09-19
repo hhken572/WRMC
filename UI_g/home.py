@@ -256,13 +256,13 @@ class Ui_Form(object):
         self.lbl_ok.setText(QCoreApplication.translate("Form", u"1", None))
         self.label_7.setText(QCoreApplication.translate("Form", u"%NG", None))
         self.label_6.setText(QCoreApplication.translate("Form", u"1", None))
-        self.groupBox_6.setTitle(QCoreApplication.translate("Form", u"CAMERA 1 - L1", None))
+        self.groupBox_6.setTitle(QCoreApplication.translate("Form", u"CAMERA 1 - KI\u1ec2M TRA L\u1ed6I LOGO", None))
         self.lbl_step0.setText(QCoreApplication.translate("Form", u"P1", None))
-        self.groupBox_7.setTitle(QCoreApplication.translate("Form", u"CAMERA 2", None))
+        self.groupBox_7.setTitle(QCoreApplication.translate("Form", u"CAMERA 2 - KI\u1ec2M TRA L\u1ed6I LOGO", None))
         self.lbl_step2.setText(QCoreApplication.translate("Form", u"P4", None))
-        self.groupBox_8.setTitle(QCoreApplication.translate("Form", u"CAMERA 1 - L2 - G\u1ed0C", None))
+        self.groupBox_8.setTitle(QCoreApplication.translate("Form", u"CH\u01afA C\u1eacP NH\u1eacT", None))
         self.lbl_step1_raw.setText(QCoreApplication.translate("Form", u"P2", None))
-        self.groupBox_9.setTitle(QCoreApplication.translate("Form", u"CAMERA 1 - L2 - NH\u1eca PH\u00c2N", None))
+        self.groupBox_9.setTitle(QCoreApplication.translate("Form", u"CAMERA 1 - KI\u1ec2M TRA L\u1ec6CH LOGO", None))
         self.lbl_step1_bin.setText(QCoreApplication.translate("Form", u"P3", None))
     # retranslateUi
 

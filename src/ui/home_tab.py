@@ -135,7 +135,7 @@ class HomeTab(QWidget, HomeUi):
             self.ui.lbl_total.setStyleSheet(style)
 
             # HẸN GIỜ ĐÚNG 2 GIÂY (2000ms) SAU ĐỂ RESET VÙNG HIỂN THỊ
-            QTimer.singleShot(2000, self.reset_all_labels)
+            QTimer.singleShot(5000, self.reset_all_labels)
     
     def reset_all_labels(self):
         """Đưa 4 label ảnh và 1 label kết quả về trạng thái hiển thị dấu '-'."""

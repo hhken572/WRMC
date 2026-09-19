@@ -133,7 +133,7 @@ def flush_queue(q):
         except (queue.Empty, Exception):
             break
 
-def inspection_manager_process(q_cam1, q_cam2, res_queue, stop_event, timeout_sec=3.0):
+def inspection_manager_process(q_cam1, q_cam2, res_queue, stop_event, cmd_cam1, timeout_sec=10.0):
     ai_engine = AIInferenceEngine()
     cv_proc = CVProcessor()
     modbus = PLCModbusClient(ip="192.168.1.50", port=502)
@@ -160,6 +160,13 @@ def inspection_manager_process(q_cam1, q_cam2, res_queue, stop_event, timeout_se
         if current_step > 0 and cycle_start_time is not None:
             if (time.time() - cycle_start_time) > timeout_sec:
                 print(f"❌ [TIMEOUT] Quá {timeout_sec}s -> Phán định NG & Reset!")
+
+
+                # print(f"❌ [TIMEOUT] Quá {timeout_sec}s -> Kích chân Line0 NG & Reset!")
+                # # 👉 Kích chân Line0 sáng đèn trong 1s
+                # cmd_cam1.put("PULSE_NG")
+
+
                 modbus.send_inspection_result(result_code=3)  # 3: Timeout NG
                 res_queue.put({"type": "RESULT", "status": "TIMEOUT_NG", "data": step_results})
                 reset_fsm()
@@ -196,6 +203,34 @@ def inspection_manager_process(q_cam1, q_cam2, res_queue, stop_event, timeout_se
         # -------------------------------------------------------------
         # BƯỚC 2: Cam 1 - Đèn 2 - Tách biệt AI 2 và OpenCV
         # -------------------------------------------------------------
+        # elif current_step == 1:
+        #     try:
+        #         data = q_cam1.get(timeout=0.05)
+        #         cam_id, frame = data if isinstance(data, tuple) else (0, data)
+
+        #         print("-> Đã nhận ảnh Bước 2 từ q_cam1")
+
+        #         # 1. Chạy AI 2 trên ảnh gốc -> Ra ảnh ann2 có vẽ kết quả AI
+        #         ok2_ai, msg2_ai, ann2_ai = ai_engine.run_ai_2(frame)
+                
+        #         # 2. Chạy OpenCV trên ảnh GỐC (frame) -> Trả về ảnh nhị phân đã vẽ kết quả CV
+        #         ok2_cv, area_val, thresh_annotated = CVProcessor.measure_area(frame)
+                
+        #         step_results['step2'] = (ok2_ai and ok2_cv)
+
+        #         # 3. Đẩy lên UI:
+        #         # - 'image': Ảnh màu có kết quả AI2
+        #         # - 'thresh_image': Ảnh nhị phân có vẽ contour và text kết quả CV
+        #         res_queue.put({
+        #             "type": "FRAME",
+        #             "cam_id": 1,
+        #             "image": ann2_ai,
+        #             "thresh_image": thresh_annotated,
+        #             "step": 1,
+        #             "ok": step_results['step2']
+        #         })
+        #         current_step = 2
+
         elif current_step == 1:
             try:
                 data = q_cam1.get(timeout=0.05)
@@ -203,24 +238,34 @@ def inspection_manager_process(q_cam1, q_cam2, res_queue, stop_event, timeout_se
 
                 print("-> Đã nhận ảnh Bước 2 từ q_cam1")
 
-                # 1. Chạy AI 2 trên ảnh gốc -> Ra ảnh ann2 có vẽ kết quả AI
+                # 1. Chạy AI 2 trên ảnh gốc
                 ok2_ai, msg2_ai, ann2_ai = ai_engine.run_ai_2(frame)
                 
-                # 2. Chạy OpenCV trên ảnh GỐC (frame) -> Trả về ảnh nhị phân đã vẽ kết quả CV
-                ok2_cv, area_val, thresh_annotated = CVProcessor.measure_area(frame)
+                # 2. Chạy OpenCV kiểm tra độ nghiêng chữ với bộ tham số thực tế đã calibrate
+                ok2_cv, ratio_val, deskew_annotated = CVProcessor.measure_alignment(
+                    frame=frame,
+                    thresh_rotate=174,
+                    blur_k=5,
+                    spacing=400,
+                    scan_dir=1,
+                    thresh_letters=154,
+                    min_char_area=2180,
+                    max_char_area=50000,
+                    min_char_h=15,
+                    max_ratio_limit=1.2
+                )
                 
                 step_results['step2'] = (ok2_ai and ok2_cv)
 
-                # 3. Đẩy lên UI:
-                # - 'image': Ảnh màu có kết quả AI2
-                # - 'thresh_image': Ảnh nhị phân có vẽ contour và text kết quả CV
+                # 3. Đẩy lên UI
                 res_queue.put({
                     "type": "FRAME",
                     "cam_id": 1,
                     "image": ann2_ai,
-                    "thresh_image": thresh_annotated,
+                    "thresh_image": deskew_annotated,  # Ảnh đã xoay phẳng và vẽ kết quả đo h/L
                     "step": 1,
-                    "ok": step_results['step2']
+                    "ok": step_results['step2'],
+                    "ratio": ratio_val
                 })
                 current_step = 2
 
@@ -255,6 +300,25 @@ def inspection_manager_process(q_cam1, q_cam2, res_queue, stop_event, timeout_se
                 # Tổng hợp kết quả toàn chu trình
                 final_status = all(step_results.values())
                 result_code = 1 if final_status else 2
+
+
+                # # 👉 NẾU NG -> GỬI LỆNH KÍCH CHÂN LINE0 CAM 20MP TRONG 1S
+                # if not final_status:
+                #     print("⚠️ [RESULT: NG] -> Bắn xung kích chân Line0 1s!")
+                #     cmd_cam1.put("PULSE_NG")
+                # else:
+                #     print("✅ [RESULT: OK]")
+
+
+                # 👉 ĐẢO LOGIC: CHỈ KÍCH OUTPUT KHI TẤT CẢ ĐỀU OK
+                if final_status:
+                    print("✅ [RESULT: OK] -> Bắn xung kích chân Line0 1s!")
+                    if cmd_cam1 is not None:
+                        cmd_cam1.put("PULSE_NG")  # Lệnh này gọi trigger_ng_pulse (bật chân Line0 1s)
+                else:
+                    print("⚠️ [RESULT: NG] -> Không kích Output.")
+
+
                 modbus.send_inspection_result(result_code=result_code)
 
                 res_queue.put({
@@ -263,7 +327,10 @@ def inspection_manager_process(q_cam1, q_cam2, res_queue, stop_event, timeout_se
                     "data": step_results
                 })
                 print(f"🏁 === KẾT QUẢ CHU KỲ: {'OK' if final_status else 'NG'} ===")
+
+                # time.sleep(10000)
                 reset_fsm()
+
 
             except queue.Empty:
                 pass
