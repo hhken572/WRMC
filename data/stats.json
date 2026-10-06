@@ -1,0 +1,173 @@
+[
+    {
+        "date": "2026-08-22",
+        "recipe": "1",
+        "start_time": "11:16",
+        "end_time": "14:17:00",
+        "total_count": 2,
+        "ok_count": 1,
+        "ng_count": 1
+    },
+    {
+        "date": "2026-08-22",
+        "recipe": "2",
+        "start_time": "11:16",
+        "end_time": "14:17:00",
+        "total_count": 1,
+        "ok_count": 1,
+        "ng_count": 0
+    },
+    {
+        "date": "2026-08-24",
+        "recipe": "1",
+        "start_time": "19:22:37",
+        "end_time": "19:27:15",
+        "total_count": 10,
+        "ok_count": 6,
+        "ng_count": 4
+    },
+    {
+        "date": "2026-09-05",
+        "recipe": "1",
+        "start_time": "10:24:14",
+        "end_time": "19:58:23",
+        "total_count": 189,
+        "ok_count": 38,
+        "ng_count": 151
+    },
+    {
+        "date": "2026-09-20",
+        "recipe": "1",
+        "start_time": "19:16:47",
+        "end_time": "19:20:31",
+        "total_count": 5,
+        "ok_count": 0,
+        "ng_count": 5
+    },
+    {
+        "date": "2026-09-21",
+        "recipe": "1",
+        "start_time": "16:03:27",
+        "end_time": "18:43:48",
+        "total_count": 16,
+        "ok_count": 5,
+        "ng_count": 11
+    },
+    {
+        "date": "2026-09-22",
+        "recipe": "1",
+        "start_time": "09:51:28",
+        "end_time": "20:12:08",
+        "total_count": 2342,
+        "ok_count": 967,
+        "ng_count": 1375
+    },
+    {
+        "date": "2026-09-23",
+        "recipe": "1",
+        "start_time": "07:58:57",
+        "end_time": "17:46:52",
+        "total_count": 1727,
+        "ok_count": 1278,
+        "ng_count": 449
+    },
+    {
+        "date": "2026-09-24",
+        "recipe": "1",
+        "start_time": "11:03:24",
+        "end_time": "15:37:59",
+        "total_count": 373,
+        "ok_count": 35,
+        "ng_count": 338
+    },
+    {
+        "date": "2026-09-25",
+        "recipe": "1",
+        "start_time": "07:54:59",
+        "end_time": "19:09:29",
+        "total_count": 724,
+        "ok_count": 39,
+        "ng_count": 685
+    },
+    {
+        "date": "2026-09-26",
+        "recipe": "1",
+        "start_time": "08:10:48",
+        "end_time": "19:29:59",
+        "total_count": 6842,
+        "ok_count": 5273,
+        "ng_count": 1569
+    },
+    {
+        "date": "2026-09-28",
+        "recipe": "1",
+        "start_time": "07:32:01",
+        "end_time": "18:43:20",
+        "total_count": 8190,
+        "ok_count": 7150,
+        "ng_count": 1040
+    },
+    {
+        "date": "2026-09-29",
+        "recipe": "1",
+        "start_time": "07:40:46",
+        "end_time": "19:37:44",
+        "total_count": 12553,
+        "ok_count": 11747,
+        "ng_count": 806
+    },
+    {
+        "date": "2026-09-30",
+        "recipe": "1",
+        "start_time": "07:28:56",
+        "end_time": "19:50:46",
+        "total_count": 12373,
+        "ok_count": 11561,
+        "ng_count": 812
+    },
+    {
+        "date": "2026-10-01",
+        "recipe": "1",
+        "start_time": "07:29:47",
+        "end_time": "20:04:43",
+        "total_count": 10690,
+        "ok_count": 9918,
+        "ng_count": 772
+    },
+    {
+        "date": "2026-10-02",
+        "recipe": "1",
+        "start_time": "07:29:04",
+        "end_time": "19:44:09",
+        "total_count": 9800,
+        "ok_count": 9157,
+        "ng_count": 643
+    },
+    {
+        "date": "2026-10-03",
+        "recipe": "1",
+        "start_time": "07:24:15",
+        "end_time": "19:35:50",
+        "total_count": 12940,
+        "ok_count": 12371,
+        "ng_count": 569
+    },
+    {
+        "date": "2026-10-05",
+        "recipe": "1",
+        "start_time": "07:27:02",
+        "end_time": "19:34:26",
+        "total_count": 10357,
+        "ok_count": 9674,
+        "ng_count": 683
+    },
+    {
+        "date": "2026-10-06",
+        "recipe": "1",
+        "start_time": "07:26:29",
+        "end_time": "16:12:21",
+        "total_count": 9006,
+        "ok_count": 8296,
+        "ng_count": 710
+    }
+]

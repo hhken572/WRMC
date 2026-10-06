@@ -1,0 +1,14 @@
+# bo qua moi thu muc trong du an
+/*
+
+# nhung cho phep cac file thu muc nay duoc theo doi
+!src/
+!.gitignore
+!data/
+!training/
+!Mvlmport/
+!UI/
+!UI_g/
+!command.txt
+!main.py
+!note.txt
